@@ -1,10 +1,14 @@
+import Toast from 'react-bootstrap/Toast'
 
-const Message = ({ item }) => {
+
+
+
+const Message = ({ item }, key) => {
 
     return (
-        <div>
-            <span>{item.user}: {item.text}</span>
-        </div>
+        <Toast key={key}>
+            <Toast.Body >{`${item.user}: ${item.text}`}</Toast.Body>
+        </Toast>
     )
 }
 
