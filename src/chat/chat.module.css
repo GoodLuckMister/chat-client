@@ -9,3 +9,7 @@
 .Form {
   margin-bottom: 30px;
 }
+.Container {
+  display: flex;
+  justify-content: center;
+}

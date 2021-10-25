@@ -34,6 +34,9 @@ class Chat extends PureComponent {
             this.setState({ users: data })
         })
     }
+    componentWillUnmount() {
+        this.socket.disconnect()
+    }
     changeName = (event) => {
         this.setState({ currentUser: event.target.value })
     }
@@ -51,7 +54,6 @@ class Chat extends PureComponent {
         event.preventDefault()
 
         const { currentUser, message } = this.state
-        console.log(message)
         if (message.trim().length > 0) {
             this.socket.emit('message', { user: currentUser, message: message.trim() })
             this.setState({ message: '' })
@@ -95,15 +97,11 @@ class Chat extends PureComponent {
 
                 </div>
                 <ul>
-
                     {Object.values(users).map((user, id) => (
                         <li key={id}>{user}</li>
                     ))}
-
                 </ul>
-
             </div>
-
         )
     }
 }
