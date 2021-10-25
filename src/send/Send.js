@@ -5,14 +5,14 @@ import s from '../chat/chat.module.css'
 const Send = ({ value, onChange, onSend }) => {
     return (
         <div>
-            <form className={s.Form} noValidate autoComplete="off">
+            <form onSubmit={onSend} className={s.Form} noValidate autoComplete="off">
                 <Input
                     placeholder="Write your message"
                     inputProps={{ 'aria-label': 'description' }}
                     onChange={onChange}
                     value={value}
                 />
-                <Button onClick={onSend} variant="contained" color="primary">
+                <Button type="submit" variant="contained" color="primary">
                     Send
                 </Button>
             </form>

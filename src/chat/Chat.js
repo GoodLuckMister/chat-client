@@ -38,9 +38,11 @@ class Chat extends PureComponent {
         this.socket.disconnect()
     }
     changeName = (event) => {
+
         this.setState({ currentUser: event.target.value })
     }
-    inputName = () => {
+    inputName = event => {
+        event.preventDefault()
         const user = this.state.currentUser
         if (user.trim().length > 0) {
             this.socket.emit('change:name', user)
@@ -65,17 +67,18 @@ class Chat extends PureComponent {
             return (
                 <div className={s.Box} >
                     <p>Send your name in form</p>
-                    <form className={s.Form} noValidate autoComplete="off">
+                    <form onSubmit={this.inputName} className={s.Form} noValidate autoComplete="off">
                         <Input
                             placeholder="Write your name"
                             inputProps={{ 'aria-label': 'description' }}
                             onChange={this.changeName}
                             value={currentUser}
                         />
+                        <Button type="submit" variant="contained" color="primary">
+                            Connect
+                        </Button>
                     </form>
-                    <Button onClick={this.inputName} variant="contained" color="primary">
-                        Connect
-                    </Button>
+
                 </div>
             )
         }
@@ -97,11 +100,15 @@ class Chat extends PureComponent {
 
                 </div>
                 <ul>
+
                     {Object.values(users).map((user, id) => (
                         <li key={id}>{user}</li>
                     ))}
+
                 </ul>
+
             </div>
+
         )
     }
 }
